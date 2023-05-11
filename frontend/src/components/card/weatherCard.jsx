@@ -4,7 +4,11 @@ const WeatherCard = () => {
       <div className="m-3">
         <div className="d-flex flex-wrap card-view pb-4">
           <div className="col-12">
-            <button type="button" class="btn-close" aria-label="Close"></button>
+            <button
+              type="button"
+              className="btn-close"
+              aria-label="Close"
+            ></button>
           </div>
           <div className="col-7 mt-0 text-center">
             <div className="col-12">
