@@ -36,3 +36,28 @@ body {
   color: #6a6c73;
   font-weight: bold;
 }
+
+.weather-card .dark {
+  background-color: #383b47;
+}
+
+.weather-card .dark .custom-border {
+  border-color: white;
+  border: 1px solid;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.weather-card .card-view {
+  background-color: #388ee7;
+  background-image: url("../public/resources/card-background.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+@media (min-width: 992px) {
+  .render-card {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
