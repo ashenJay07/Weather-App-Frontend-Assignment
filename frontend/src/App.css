@@ -1,0 +1,38 @@
+.header img {
+  width: 60px;
+  height: auto;
+}
+
+body {
+  background-color: #1f2128 !important;
+  color: white !important;
+  background-image: url("../public/resources/background.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% auto;
+}
+
+.search-bar input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.search-bar button {
+  width: 130px;
+  background-color: #6c5dd3;
+  border: none;
+  color: white;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.search-bar button:hover,
+.search-bar button:active {
+  background-color: #5240d3 !important;
+}
+
+.footer {
+  background-color: #30333d;
+  color: #6a6c73;
+  font-weight: bold;
+}

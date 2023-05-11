@@ -1,7 +1,10 @@
+import "./App.css";
+import Header from "./components/layout/header";
+
 function App() {
   return (
     <div className="App">
-      <h2>Working Space</h2>
+      <Header />
     </div>
   );
 }
