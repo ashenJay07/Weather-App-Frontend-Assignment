@@ -20,16 +20,19 @@ const City = () => {
       cachedWeatherData &&
       new Date().getTime() > JSON.parse(cachedWeatherData).expiry
     ) {
+      // Remove cached data after its expired
       localStorage.removeItem("weatherData");
     }
 
     if (!localStorage.getItem("weatherData")) {
+      // fetching weather data from server using RESTful API
       try {
         const response = await axios.get(
           `${API.url}id=${cityCodeList}&units=metric&appid=${API.key}`
         );
         const data = response.data;
 
+        // Setting up expire time
         const expireTime = new Date().setTime(
           new Date().getTime() + 5 * 60 * 1000
         ); // expire time = 5 min
@@ -52,6 +55,7 @@ const City = () => {
 
     for (let city of cities.List) tempCityCode.push(city.CityCode);
 
+    // remove view weather card cached data
     setCityCodes(tempCityCode);
     localStorage.removeItem("cardViewData");
   }, []);

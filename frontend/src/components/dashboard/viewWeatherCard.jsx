@@ -4,12 +4,12 @@ const ViewWeatherCard = () => {
   const [weatherDate, setWeatherDate] = useState(null);
 
   useEffect(() => {
+    // accessing cached data from local storage
     setWeatherDate(JSON.parse(localStorage.getItem("cardViewData")).data);
   }, []);
 
   const handleClickEvent = () => {
-    console.log("clicked");
-    window.history.back();
+    window.history.back(); // moving back to previous page
   };
 
   return (

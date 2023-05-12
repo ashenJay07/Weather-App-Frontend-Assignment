@@ -10,6 +10,7 @@ const WeatherCardList = () => {
     const existingWeatherData = JSON.parse(localStorage.getItem("weatherData")).data.list;
     // console.log(existingWeatherData);
 
+    // assigning color themes for each card
     var i = 0;
     for (let data of existingWeatherData) {
       data.bgColor = colorPalette.theme[i];
@@ -19,6 +20,7 @@ const WeatherCardList = () => {
     setWeatherData(existingWeatherData);
   }, []);
 
+  // filtering weather data object when cards removeing from existing object
   const handleCardList = (weatherDate) => {
     const modifiedWeatherData = weatherData.filter(
       (data) => data !== weatherDate

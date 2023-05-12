@@ -4,6 +4,7 @@ const WeatherCard = ({ weatherDate, handleCardList }) => {
   const navigate = useNavigate();
 
   const handleClickEvent = (weatherDate) => {
+    // cashing data
     localStorage.setItem("cardViewData", JSON.stringify({ data: weatherDate }));
     navigate("/viewWeatherCard");
   };
