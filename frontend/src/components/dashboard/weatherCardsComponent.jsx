@@ -12,33 +12,52 @@ const City = () => {
     url: "https://api.openweathermap.org/data/2.5/group?",
   };
 
-  const getWeatherData = async (cityCodeList) => {
-    try {
-      const response = await axios.get(
-        `${API.url}id=${cityCodeList}&units=metric&appid=${API.key}`
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
+  const fetchWeatherData = async (cityCodeList) => {
+    var cachedWeatherData = localStorage.getItem("weatherData");
+
+    if (
+      cachedWeatherData &&
+      new Date().getTime() > JSON.parse(cachedWeatherData).expiry
+    ) {
+      localStorage.removeItem("weatherData");
+    }
+
+    if (!localStorage.getItem("weatherData")) {
+      try {
+        const response = await axios.get(
+          `${API.url}id=${cityCodeList}&units=metric&appid=${API.key}`
+        );
+        const data = response.data;
+
+        const expireTime = new Date().setTime(
+          new Date().getTime() + 5 * 60 * 1000
+        ); // expire time = 5 min
+
+        const weatherDate = {
+          data: data,
+          expiry: expireTime,
+        };
+
+        // Cache the weather data
+        localStorage.setItem("weatherData", JSON.stringify(weatherDate));
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+      }
     }
   };
 
   useEffect(() => {
-    const fetchData = () => {
-      const tempCityCode = [];
+    const tempCityCode = [];
 
-      for (let city of cities.List) tempCityCode.push(city.CityCode);
+    for (let city of cities.List) tempCityCode.push(city.CityCode);
 
-      setCityCodes(tempCityCode);
-    };
-
-    fetchData();
+    setCityCodes(tempCityCode);
   }, []);
 
   useEffect(() => {
     const cityCodeList = cityCodes.join();
 
-    if (cityCodeList) getWeatherData(cityCodeList);
+    if (cityCodeList) fetchWeatherData(cityCodeList);
   });
 
   return (
