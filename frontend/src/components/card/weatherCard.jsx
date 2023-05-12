@@ -26,7 +26,10 @@ const WeatherCard = ({ weatherDate, handleCardList }) => {
               onClick={() => handleCloseEvent(weatherDate)}
             ></i>
           </div>
-          <div className="col-7 mt-0 text-center" onClick={handleClickEvent}>
+          <div
+            className="col-7 mt-0 text-center"
+            onClick={() => handleClickEvent(weatherDate)}
+          >
             <div className="col-12">
               <h5>{weatherDate.name}</h5>
               <small>{new Date().toLocaleTimeString()}</small>
