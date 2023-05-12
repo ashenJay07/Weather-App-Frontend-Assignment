@@ -1,30 +1,32 @@
 import { useNavigate } from "react-router-dom";
 
-const WeatherCard = ({ weatherDate }) => {
-  console.log(weatherDate);
+const WeatherCard = ({ weatherDate, handleCardList }) => {
   const navigate = useNavigate();
 
   const handleClickEvent = (weatherDate) => {
-    console.log(weatherDate);
     localStorage.setItem("cardViewData", JSON.stringify({ data: weatherDate }));
     navigate("/viewWeatherCard");
   };
 
+  const handleCloseEvent = (weatherDate) => {
+    handleCardList(weatherDate);
+  };
+
   return (
     <div className="col-sm-6 weather-card">
-      <div
-        className="m-3 hover-card"
-        onClick={() => handleClickEvent(weatherDate)}
-      >
-        <div className="d-flex flex-wrap card-view pb-4">
-          <div className="col-12">
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-            ></button>
+      <div className="m-3 hover-card">
+        <div
+          className="d-flex flex-wrap card-view pb-4"
+          style={{ backgroundColor: `${weatherDate.bgColor}` }}
+        >
+          <div className="col-12 d-flex flex-row-reverse ">
+            <i
+              className="bi bi-x"
+              style={{ fontSize: "30px", marginRight: "10px" }}
+              onClick={() => handleCloseEvent(weatherDate)}
+            ></i>
           </div>
-          <div className="col-7 mt-0 text-center">
+          <div className="col-7 mt-0 text-center" onClick={handleClickEvent}>
             <div className="col-12">
               <h5>{weatherDate.name}</h5>
               <small>{new Date().toLocaleTimeString()}</small>
@@ -38,7 +40,10 @@ const WeatherCard = ({ weatherDate }) => {
               {weatherDate.weather[0].description}
             </div>
           </div>
-          <div className="col-5 text-center">
+          <div
+            className="col-5 text-center"
+            onClick={() => handleClickEvent(weatherDate)}
+          >
             <div>
               <h1>{weatherDate.main.temp}&#8451;</h1>
             </div>
@@ -49,7 +54,10 @@ const WeatherCard = ({ weatherDate }) => {
             </div>
           </div>
         </div>
-        <div className="dark d-flex py-4">
+        <div
+          className="dark d-flex py-4"
+          onClick={() => handleClickEvent(weatherDate)}
+        >
           <div className="col-4 text-center">
             <small>Pressure: {weatherDate.main.pressure}</small>
             <br />
@@ -58,7 +66,8 @@ const WeatherCard = ({ weatherDate }) => {
             <small>Visibility: {weatherDate.visibility / 1000}km</small>
           </div>
           <div className="col-4 text-center custom-border">
-            <p>Icon</p>
+            <i className="bi bi-cursor-fill" style={{ fontSize: "25px" }}></i>
+            <br />
             <small>4.0m/s 120 Degree</small>
           </div>
           <div className="col-4 text-center">

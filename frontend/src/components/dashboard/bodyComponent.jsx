@@ -29,7 +29,6 @@ const City = () => {
           `${API.url}id=${cityCodeList}&units=metric&appid=${API.key}`
         );
         const data = response.data;
-        console.log(data);
 
         const expireTime = new Date().setTime(
           new Date().getTime() + 5 * 60 * 1000

@@ -7,18 +7,30 @@ const ViewWeatherCard = () => {
     setWeatherDate(JSON.parse(localStorage.getItem("cardViewData")).data);
   }, []);
 
+  const handleClickEvent = () => {
+    console.log("clicked");
+    window.history.back();
+  };
+
   return (
-    <div className="col-sm-8 mb-4" style={{ margin: "auto" }}>
+    <div className="col-sm-7 mb-4" style={{ margin: "auto" }}>
       {weatherDate ? (
         <div className="col-sm-12 weather-cardview">
           <div className="m-3">
-            <div className="d-flex flex-wrap card-view pb-4">
+            <div
+              className="d-flex flex-wrap card-view pb-4"
+              style={{ backgroundColor: `${weatherDate.bgColor}` }}
+            >
               <div className="col-12">
-                <button
-                  type="button"
-                  className="btn-close"
-                  aria-label="Close"
-                ></button>
+                <i
+                  className="bi bi-arrow-left"
+                  style={{
+                    fontSize: "30px",
+                    marginLeft: "10px",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleClickEvent}
+                ></i>
               </div>
               <div className="col-7 mt-0 text-center">
                 <div className="col-12">
@@ -54,7 +66,11 @@ const ViewWeatherCard = () => {
                 <small>Visibility: {weatherDate.visibility / 1000}km</small>
               </div>
               <div className="col-4 text-center custom-border">
-                <p>Icon</p>
+                <i
+                  className="bi bi-cursor-fill"
+                  style={{ fontSize: "25px" }}
+                ></i>
+                <br />
                 <small>4.0m/s 120 Degree</small>
               </div>
               <div className="col-4 text-center">
