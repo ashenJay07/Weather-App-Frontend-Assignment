@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import cities from "../../data/cities.json";
-import WeatherCard from "../card/weatherCard";
+import SearchBar from "./searchBar";
+import WeatherCardList from "./weatherCardList";
 
 const City = () => {
   const [cityCodes, setCityCodes] = useState([]);
@@ -28,6 +29,7 @@ const City = () => {
           `${API.url}id=${cityCodeList}&units=metric&appid=${API.key}`
         );
         const data = response.data;
+        console.log(data);
 
         const expireTime = new Date().setTime(
           new Date().getTime() + 5 * 60 * 1000
@@ -52,6 +54,7 @@ const City = () => {
     for (let city of cities.List) tempCityCode.push(city.CityCode);
 
     setCityCodes(tempCityCode);
+    localStorage.removeItem("cardViewData");
   }, []);
 
   useEffect(() => {
@@ -61,17 +64,10 @@ const City = () => {
   });
 
   return (
-    <div className="container mt-5">
-      <div className="col-sm-9 " style={{ margin: "auto" }}>
-        <div className="render-card">
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
-          <WeatherCard />
-        </div>
-      </div>
-    </div>
+    <>
+      <SearchBar />
+      <WeatherCardList />
+    </>
   );
 };
 

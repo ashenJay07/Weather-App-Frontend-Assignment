@@ -1,7 +1,21 @@
-const WeatherCard = () => {
+import { useNavigate } from "react-router-dom";
+
+const WeatherCard = ({ weatherDate }) => {
+  console.log(weatherDate);
+  const navigate = useNavigate();
+
+  const handleClickEvent = (weatherDate) => {
+    console.log(weatherDate);
+    localStorage.setItem("cardViewData", JSON.stringify({ data: weatherDate }));
+    navigate("/viewWeatherCard");
+  };
+
   return (
     <div className="col-sm-6 weather-card">
-      <div className="m-3">
+      <div
+        className="m-3 hover-card"
+        onClick={() => handleClickEvent(weatherDate)}
+      >
         <div className="d-flex flex-wrap card-view pb-4">
           <div className="col-12">
             <button
@@ -12,39 +26,57 @@ const WeatherCard = () => {
           </div>
           <div className="col-7 mt-0 text-center">
             <div className="col-12">
-              <h5>Colombo, LK</h5>
-              <small>9:37 AM</small>
+              <h5>{weatherDate.name}</h5>
+              <small>{new Date().toLocaleTimeString()}</small>
             </div>
-            <div className="col-12 mt-3">{`<Icon> `}Few Clouds</div>
+            <div className="col-12 mt-3">
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherDate.weather[0].icon}@2x.png`}
+                alt=""
+                style={{ width: "50px", height: "auto" }}
+              />
+              {weatherDate.weather[0].description}
+            </div>
           </div>
           <div className="col-5 text-center">
             <div>
-              <h1>7&#8451;</h1>
+              <h1>{weatherDate.main.temp}&#8451;</h1>
             </div>
             <div>
-              <small>Temp min: </small>
+              <small>Temp min: {weatherDate.main.temp_min}</small>
               <br />
-              <small>Temp max: </small>
+              <small>Temp max: {weatherDate.main.temp_max}</small>
             </div>
           </div>
         </div>
         <div className="dark d-flex py-4">
           <div className="col-4 text-center">
-            <small>Pressure: 122343</small>
+            <small>Pressure: {weatherDate.main.pressure}</small>
             <br />
-            <small>Humidity: 78%</small>
+            <small>Humidity: {weatherDate.main.humidity}%</small>
             <br />
-            <small>Visibility: 8.0km</small>
+            <small>Visibility: {weatherDate.visibility / 1000}km</small>
           </div>
           <div className="col-4 text-center custom-border">
             <p>Icon</p>
             <small>4.0m/s 120 Degree</small>
           </div>
           <div className="col-4 text-center">
-            <small>Sunrise: 6.05AM</small>
+            <small>
+              Sunrise:{" "}
+              {new Date(weatherDate.sys.sunrise * 1000).toLocaleTimeString()}
+            </small>
             <br />
-            <small>Sunset: 6.05AM</small>
+            <small>
+              Sunset:{" "}
+              {new Date(weatherDate.sys.sunset * 1000).toLocaleTimeString()}
+            </small>
           </div>
+        </div>
+        <div>
+          <small>{`Last data update's timespan: ${new Date(
+            weatherDate.dt * 1000
+          ).toLocaleTimeString()}`}</small>
         </div>
       </div>
     </div>
