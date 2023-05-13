@@ -43,7 +43,7 @@ const WeatherCardList = () => {
           </div>
         </div>
       ) : (
-        ""
+        <div>Content not available</div>
       )}
     </div>
   );

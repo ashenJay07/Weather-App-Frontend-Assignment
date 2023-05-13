@@ -32,28 +32,44 @@ const ViewWeatherCard = () => {
                   onClick={handleClickEvent}
                 ></i>
               </div>
-              <div className="col-7 mt-0 text-center">
-                <div className="col-12">
-                  <h5>{weatherDate.name}</h5>
-                  <small>{new Date().toLocaleTimeString()}</small>
-                </div>
-                <div className="col-12 mt-3">
-                  <img
-                    src={`https://openweathermap.org/img/wn/${weatherDate.weather[0].icon}@2x.png`}
-                    alt=""
-                    style={{ width: "50px", height: "auto" }}
-                  />
-                  {weatherDate.weather[0].description}
-                </div>
-              </div>
-              <div className="col-5 text-center">
-                <div>
-                  <h1>{weatherDate.main.temp}&#8451;</h1>
-                </div>
-                <div>
-                  <small>Temp min: {weatherDate.main.temp_min}</small>
-                  <br />
-                  <small>Temp max: {weatherDate.main.temp_max}</small>
+              <div className="col-12">
+                <div className="col-sm-6" style={{ margin: "auto" }}>
+                  <div className="col-12 text-center mb-4">
+                    <h2>{weatherDate.name}</h2>
+                    <small>{new Date().toLocaleTimeString()}</small>
+                  </div>
+                  <div className="col-12 d-flex">
+                    <div className="col-6 mt-0 text-center">
+                      <div className="col-12 mt-3 pb-3">
+                        <div className="col-12">
+                          <img
+                            src={`https://openweathermap.org/img/wn/${weatherDate.weather[0].icon}@2x.png`}
+                            alt=""
+                            style={{ width: "100px", height: "auto" }}
+                          />
+                        </div>
+                        <div className="col-12">
+                          {weatherDate.weather[0].description}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 text-center d-flex align-items-end justify-content-center viewcard pb-3">
+                      <div>
+                        <div className="col-12">
+                          <h1>{weatherDate.main.temp}&#8451;</h1>
+                        </div>
+                        <div>
+                          <small className="col-12">
+                            Temp min: {weatherDate.main.temp_min}
+                          </small>
+                          <br />
+                          <small className="col-12">
+                            Temp max: {weatherDate.main.temp_max}
+                          </small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -95,7 +111,7 @@ const ViewWeatherCard = () => {
           </div>
         </div>
       ) : (
-        <div>Boom</div>
+        <div>Content not available</div>
       )}
     </div>
   );
