@@ -7,6 +7,7 @@ import WeatherCardList from "./weatherCardList";
 
 const City = () => {
   const [cityCodes, setCityCodes] = useState([]);
+  const [isDataAvailable, setDataAvailability] = useState(false);
 
   const API = {
     key: "1908882df1b2926636731dcf2f2061eb",
@@ -44,11 +45,15 @@ const City = () => {
 
         // Cache the weather data
         localStorage.setItem("weatherData", JSON.stringify(weatherDate));
+
+        checkingDataAvailablity();
       } catch (error) {
         console.error("Error fetching weather data:", error);
       }
     }
   };
+
+  console.log(isDataAvailable);
 
   useEffect(() => {
     const tempCityCode = [];
@@ -64,12 +69,26 @@ const City = () => {
     const cityCodeList = cityCodes.join();
 
     if (cityCodeList) fetchWeatherData(cityCodeList);
+
+    checkingDataAvailablity();
   });
+
+  const checkingDataAvailablity = () => {
+    localStorage.getItem("weatherData")
+      ? setDataAvailability(true)
+      : setDataAvailability(null);
+  };
 
   return (
     <>
       <SearchBar />
-      <WeatherCardList />
+      {isDataAvailable ? (
+        <WeatherCardList />
+      ) : (
+        <div className="text-center mt-5">
+          <h1>Loading...</h1>
+        </div>
+      )}
     </>
   );
 };
