@@ -14,9 +14,9 @@ function App() {
 
       <Router>
         <Routes>
-          <Route path="/weatherDashboard" element={<BodyComponent />} />
           <Route path="/" element={<BodyComponent />} />
-          <Route path="/viewWeatherCard" element={<ViewWeatherCard />} />
+          <Route path="/weather-dashboard" element={<BodyComponent />} />
+          <Route path="/view-weather-card/:id" element={<ViewWeatherCard />} />
         </Routes>
       </Router>
 

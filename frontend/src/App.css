@@ -15,7 +15,16 @@ body {
 .search-bar input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  background-color: #1f2128;
+  border-color: #1f2128;
+  color: white;
 }
+
+.search-bar input:focus {
+  background-color: #1f2128;
+  color: white;
+}
+
 
 .search-bar button {
   width: 130px;

@@ -4,6 +4,7 @@ import axios from "axios";
 import cities from "../../data/cities.json";
 import SearchBar from "./searchBar";
 import WeatherCardList from "./weatherCardList";
+import colorPalette from "../../data/colorPalette.json";
 
 const City = () => {
   const [cityCodes, setCityCodes] = useState([]);
@@ -31,29 +32,34 @@ const City = () => {
         const response = await axios.get(
           `${API.url}id=${cityCodeList}&units=metric&appid=${API.key}`
         );
-        const data = response.data;
+        const weatherData = response.data;
 
-        // Setting up expire time
+        // assigning color themes for each card
+        var i = 0;
+        for (let data of weatherData.list) {
+          data.bgColor = colorPalette.theme[i];
+          i < colorPalette.theme.length - 1 ? ++i : (i = 0);
+        }
+
+        // Setting up expire time to 5 Minute
         const expireTime = new Date().setTime(
           new Date().getTime() + 5 * 60 * 1000
-        ); // expire time = 5 min
+        );
 
         const weatherDate = {
-          data: data,
+          data: weatherData,
           expiry: expireTime,
         };
 
         // Cache the weather data
         localStorage.setItem("weatherData", JSON.stringify(weatherDate));
 
-        checkingDataAvailablity();
+        checkDataAvailablity();
       } catch (error) {
         console.error("Error fetching weather data:", error);
       }
     }
   };
-
-  console.log(isDataAvailable);
 
   useEffect(() => {
     const tempCityCode = [];
@@ -70,10 +76,10 @@ const City = () => {
 
     if (cityCodeList) fetchWeatherData(cityCodeList);
 
-    checkingDataAvailablity();
+    checkDataAvailablity();
   });
 
-  const checkingDataAvailablity = () => {
+  const checkDataAvailablity = () => {
     localStorage.getItem("weatherData")
       ? setDataAvailability(true)
       : setDataAvailability(null);

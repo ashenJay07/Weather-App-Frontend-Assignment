@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 const ViewWeatherCard = () => {
   const [weatherDate, setWeatherDate] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     // accessing cached data from local storage
-    setWeatherDate(JSON.parse(localStorage.getItem("cardViewData")).data);
-  }, []);
+    var tempWeatherData = JSON.parse(localStorage.getItem("weatherData"));
+    if (tempWeatherData) {
+      tempWeatherData = tempWeatherData.data.list;
+
+      const cityWeatherData = tempWeatherData.filter(
+        (data) => data.id === parseInt(id)
+      );
+      setWeatherDate(cityWeatherData[0]);
+    }
+  }, [id]);
 
   const handleClickEvent = () => {
     window.history.back(); // moving back to previous page
@@ -111,7 +121,9 @@ const ViewWeatherCard = () => {
           </div>
         </div>
       ) : (
-        <div>Content not available</div>
+        <div className="mt-5 text-center">
+          <h3>Content not available</h3>
+        </div>
       )}
     </div>
   );

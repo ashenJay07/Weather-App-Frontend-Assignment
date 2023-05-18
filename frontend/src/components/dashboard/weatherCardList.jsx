@@ -1,31 +1,49 @@
 import { useState, useEffect } from "react";
 import WeatherCard from "../card/weatherCard";
-import colorPalette from "../../data/colorPalette.json";
 
 const WeatherCardList = () => {
-  const [weatherData, setWeatherData] = useState([]);
+  const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
     // prettier-ignore
-    const existingWeatherData = JSON.parse(localStorage.getItem("weatherData")).data.list;
-    // console.log(existingWeatherData);
+    var existingWeatherData = JSON.parse(localStorage.getItem("weatherData"));
 
-    // assigning color themes for each card
-    var i = 0;
-    for (let data of existingWeatherData) {
-      data.bgColor = colorPalette.theme[i];
-      i < colorPalette.theme.length - 1 ? ++i : (i = 0);
+    if (existingWeatherData) {
+      existingWeatherData = existingWeatherData.data.list;
+      setWeatherData(existingWeatherData);
     }
-
-    setWeatherData(existingWeatherData);
   }, []);
+
+  useEffect(() => {
+    checkDataAvailablity();
+  });
 
   // filtering weather data object when cards removeing from existing object
   const handleCardList = (weatherDate) => {
     const modifiedWeatherData = weatherData.filter(
       (data) => data !== weatherDate
     );
+
+    const expireTime = JSON.parse(localStorage.getItem("weatherData")).expiry;
+
+    const weatherDateCache = {
+      data: {
+        list: modifiedWeatherData,
+      },
+      expiry: expireTime,
+    };
+
+    // Updates cached weather data after removing a weather card
+    localStorage.setItem("weatherData", JSON.stringify(weatherDateCache));
+
+    // update local weather data
     setWeatherData(modifiedWeatherData);
+  };
+
+  const checkDataAvailablity = () => {
+    const existingWeatherData = JSON.parse(localStorage.getItem("weatherData"));
+
+    if (!existingWeatherData.data.list.length) setWeatherData(null);
   };
 
   return (
@@ -43,7 +61,9 @@ const WeatherCardList = () => {
           </div>
         </div>
       ) : (
-        <div>Content not available</div>
+        <div className="my-5 text-center">
+          <h3>Content not available</h3>
+        </div>
       )}
     </div>
   );
