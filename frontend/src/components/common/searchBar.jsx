@@ -3,7 +3,7 @@ const SearchBar = () => {
     <div className="container-fluid">
       <div className="d-flex justify-content-center">
         <div className="col-sm-4 search-bar">
-          <form className="d-flex" role="search" >
+          <form className="d-flex" role="search">
             <input
               className="form-control"
               type="search"

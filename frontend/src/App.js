@@ -2,26 +2,27 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import Footer from "./components/layout/footer";
-import Header from "./components/layout/header";
-import BodyComponent from "./components/dashboard/bodyComponent";
-import ViewWeatherCard from "./components/dashboard/viewWeatherCard";
+import Header from "./components/common/header";
+import Footer from "./components/common/footer";
+import Dashboard from "./pages/dashboard";
+import WeatherForeCast from "./pages/weatherForecast";
+import ErrorBoundary from "./middlewares/errorHandler";
 
 function App() {
   return (
-    <React.Fragment>
-      <Header />
-
+    <ErrorBoundary>
       <Router>
-        <Routes>
-          <Route path="/" element={<BodyComponent />} />
-          <Route path="/weather-dashboard" element={<BodyComponent />} />
-          <Route path="/view-weather-card/:id" element={<ViewWeatherCard />} />
-        </Routes>
-      </Router>
+        <Header />
 
-      <Footer />
-    </React.Fragment>
+        <Routes>
+          <Route path="/" Component={Dashboard} />
+          <Route path="/dashboard" Component={Dashboard} />
+          <Route path="/weather-forecast" Component={WeatherForeCast} />
+        </Routes>
+
+        <Footer />
+      </Router>
+    </ErrorBoundary>
   );
 }
 

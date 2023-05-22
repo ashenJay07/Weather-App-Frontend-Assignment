@@ -1,17 +1,31 @@
-.header img {
-  width: 60px;
-  height: auto;
-}
-
 body {
   background-color: #1f2128 !important;
   color: white !important;
-  background-image: url("../public/resources/background.png");
+  background-image: url("../src/assets/images/background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100% auto;
 }
 
+/* Header & Footer CSS */
+.header img {
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.header .page-title {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.footer {
+  background-color: #30333d;
+  color: #6a6c73;
+  font-weight: bold;
+}
+
+/* Search Bar CSS */
 .search-bar input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
@@ -24,7 +38,6 @@ body {
   background-color: #1f2128;
   color: white;
 }
-
 
 .search-bar button {
   width: 130px;
@@ -40,55 +53,24 @@ body {
   background-color: #5240d3 !important;
 }
 
-.footer {
-  background-color: #30333d;
-  color: #6a6c73;
-  font-weight: bold;
+/* ----------------------------------------- */
+
+.red {
+  background-color: red;
 }
 
-.weather-card .dark .custom-border,
-.weather-cardview .dark .custom-border {
-  border-color: white;
-  border: 1px solid;
-  border-top: 0;
-  border-bottom: 0;
+.yellow {
+  background-color: yellow;
 }
 
-.viewcard {
-  border-color: white;
-  border: 1px solid;
-  border-top: 0;
-  border-bottom: 0;
-  border-right: 0;
+.green {
+  background-color: green;
 }
 
-.weather-card .card-view {
-  background-image: url("../public/resources/card-background.png");
-  background-repeat: no-repeat;
-  background-size: 100% auto;
+.blue {
+  background-color: blue;
 }
 
-.weather-card .dark {
-  background-color: #383b47;
-}
-
-.weather-cardview .card-view {
-  background-repeat: no-repeat;
-  background-size: 100% auto;
-}
-
-.weather-cardview .dark {
-  background-color: #383b47;
-}
-
-.weather-card .hover-card:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-@media (min-width: 992px) {
-  .render-card {
-    display: flex;
-    flex-wrap: wrap;
-  }
+.pink {
+  background-color: pink;
 }

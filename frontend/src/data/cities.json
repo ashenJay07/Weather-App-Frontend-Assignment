@@ -4,7 +4,8 @@
       "CityCode": "1248991",
       "CityName": "Colombo",
       "Temp": "33.0",
-      "Status": "Clouds"
+      "Status": "Clouds",
+      "ExpiresAt": "15"
     },
     {
       "CityCode": "1850147",
