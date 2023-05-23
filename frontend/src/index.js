@@ -11,9 +11,9 @@ import { GlobalProvider } from "./context/globalState";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <GlobalProvider>
-      <App />
-    </GlobalProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <GlobalProvider>
+    <App />
+  </GlobalProvider>
+  // </React.StrictMode>
 );

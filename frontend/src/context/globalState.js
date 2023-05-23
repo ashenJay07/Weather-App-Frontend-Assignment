@@ -7,10 +7,10 @@ import AppReducer from "./appReducer";
 export const GlobalContext = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [error, setError] = useState(false);
+  const [error, errorHandler] = useState(false);
 
   return (
-    <GlobalContext.Provider value={{ error, setError }}>
+    <GlobalContext.Provider value={{ error, errorHandler }}>
       {children}
     </GlobalContext.Provider>
   );
