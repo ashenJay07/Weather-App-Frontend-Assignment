@@ -1,14 +1,15 @@
 import axios from "axios";
 import { weatherURLConstructor } from "../utils/weatherURLConstructor";
-import errorHandler from "../middlewares/errorHandler";
 
-const fetchWeatherData = async () => {
+const fetchWeatherData = async (setError) => {
   try {
     const response = await axios.get(weatherURLConstructor());
     const weatherData = response.data;
 
     // console.log(weatherData);
-  } catch (error) {}
+  } catch (error) {
+    setError(error);
+  }
 };
 
 export { fetchWeatherData };
