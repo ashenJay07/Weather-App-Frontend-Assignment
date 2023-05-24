@@ -57,42 +57,54 @@ body {
 
 .weather-card .dark .custom-border,
 .weather-cardview .dark .custom-border {
-  border-color: white;
-  border: 1px solid;
+  border-color: #515566 !important;
+  border: 2px solid;
   border-top: 0;
   border-bottom: 0;
-}
-
-.viewcard {
-  border-color: white;
-  border: 1px solid;
-  border-top: 0;
-  border-bottom: 0;
-  border-right: 0;
 }
 
 .weather-card .card-view {
   background-image: url("../src/assets/images/card-background.png");
   background-repeat: no-repeat;
   background-size: 100% auto;
+  font-weight: 500;
 }
 
-.weather-card .dark {
+.weather-card .dark,
+.weather-cardview .dark {
   background-color: #383b47;
+  font-weight: 500;
+  border-radius: 0 0 6px 6px;
+}
+
+.weather-card .card-color,
+.weather-cardview .card-color {
+  border-radius: 7px;
+}
+
+.weather-cardview .description {
+  border-color: white;
+  border-right: 1px solid;
 }
 
 .weather-cardview .card-view {
   background-repeat: no-repeat;
   background-size: 100% auto;
+  font-weight: 500;
 }
 
-.weather-cardview .dark {
-  background-color: #383b47;
+.weather-cardview .card-view i {
+  margin-left: 25px;
+  cursor: pointer;
 }
 
 .weather-card .hover-card:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.weather-cardview h1 {
+  font-size: 65px;
 }
 
 @media (min-width: 992px) {

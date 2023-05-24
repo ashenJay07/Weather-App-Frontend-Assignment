@@ -1,14 +1,19 @@
 import { DEFAULT_EXPIRE_TIME } from "../constants/constants";
 import cityData from "../data/cities.json";
-import { cityCodes, expireTimeGenerator } from "../utils/weatherUtils";
+import {
+  cityCodes,
+  dateFormatter,
+  expireTimeGenerator,
+  timeFormatter,
+} from "../utils/weatherUtils";
+import _ from "lodash";
 
 const cacheCityObjects = async (weatherDataList) => {
   for (const dataSet of weatherDataList) {
-    const { id, dt, name } = dataSet;
-    const { visibility } = dataSet;
+    const { id, dt, name, visibility } = dataSet;
     const { country, sunrise, sunset } = dataSet.sys;
     const { temp, temp_min, temp_max, pressure, humidity } = dataSet.main;
-    const { description } = dataSet.weather[0];
+    const { description, icon } = dataSet.weather[0];
     const { speed, deg } = dataSet.wind;
 
     var { ExpiresAt } = cityData.List.filter(
@@ -18,22 +23,27 @@ const cacheCityObjects = async (weatherDataList) => {
     const expTime = ExpiresAt ? ExpiresAt : DEFAULT_EXPIRE_TIME;
     const expiresAt = expireTimeGenerator(expTime);
 
+    const formattedSunrise = timeFormatter(sunrise);
+    const formattedSunset = timeFormatter(sunset);
+    const formattedDateTime = `${timeFormatter(dt)}, ${dateFormatter(dt)}`;
+
     const data = {
       id,
-      dt,
+      dt: formattedDateTime,
       name,
       visibility,
       country,
-      sunrise,
-      sunset,
-      temp,
-      temp_min,
-      temp_max,
+      sunrise: formattedSunrise,
+      sunset: formattedSunset,
+      temp: _.toInteger(temp),
+      temp_min: _.toInteger(temp_min),
+      temp_max: _.toInteger(temp_max),
       pressure,
       humidity,
-      description,
+      description: _.capitalize(description),
       speed,
       deg,
+      icon,
       expiresAt,
     };
 
@@ -60,4 +70,19 @@ const deleteCachedData = (key) => {
   localStorage.removeItem(key);
 };
 
-export { cacheCityObjects, getCachedData, getAllCachedData, deleteCachedData };
+const cacheBackgroundColor = (key, value) => {
+  localStorage.setItem(key, value);
+};
+
+const getBackgroundColor = (key) => {
+  return localStorage.getItem(key);
+};
+
+export {
+  cacheCityObjects,
+  getCachedData,
+  getAllCachedData,
+  deleteCachedData,
+  cacheBackgroundColor,
+  getBackgroundColor,
+};

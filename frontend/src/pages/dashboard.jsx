@@ -11,7 +11,7 @@ import {
   getAllCachedData,
 } from "../services/cacheController";
 import { GlobalContext } from "../context/globalState";
-import { cityCodesString } from "../utils/weatherUtils";
+import { cityCodesString, colorProvider } from "../utils/weatherUtils";
 
 const Dashboard = () => {
   const { errorHandler } = useContext(GlobalContext);
@@ -21,7 +21,8 @@ const Dashboard = () => {
     if (getAllCachedData().length === 0) {
       // prettier-ignore
       fetchWeatherData(cityCodesString, errorHandler)
-        .then(weatherDataList => cacheCityObjects(weatherDataList));
+        .then(weatherDataList => cacheCityObjects(weatherDataList))
+        .catch(error => console.log(error))
     }
 
     if (weatherData.length === 0) {
@@ -29,6 +30,8 @@ const Dashboard = () => {
         setWeatherData(getAllCachedData());
       }, 500);
     }
+
+    colorProvider();
   });
 
   const closeEvent = (key) => {

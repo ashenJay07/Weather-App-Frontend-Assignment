@@ -1,80 +1,115 @@
 import { useNavigate } from "react-router-dom";
-import { deleteCachedData } from "../../services/cacheController";
+
+import { cacheBackgroundColor } from "../../services/cacheController";
+import direction_logo from "../../assets/images/direction_icon.png";
 
 const WeatherCard = ({ weatherData, closeEvent }) => {
   const navigate = useNavigate();
 
-  //   const handleClickEvent = (weatherData) => {
-  //     navigate(`/view-weather-card/${weatherData.id}`);
-  //   };
+  const handleClickEvent = (event, id) => {
+    cacheBackgroundColor("bgColor", event.currentTarget.style.backgroundColor);
 
-  const handleCloseEvent = (key) => {
+    navigate(`/weather-forecast/${id}`);
+  };
+
+  const handleCloseEvent = (event, key) => {
+    event.stopPropagation();
     closeEvent(key);
   };
 
   return (
     <div className="col-sm-6 weather-card">
-      <div className="m-3 hover-card">
-        <div
-          className="d-flex flex-wrap card-view pb-4"
-          style={{ backgroundColor: "pink" }}
-        >
-          <div className="col-12 d-flex flex-row-reverse ">
+      <div
+        className="m-3 hover-card card-color"
+        onClick={(event) => handleClickEvent(event, weatherData.id)}
+      >
+        <div className="d-flex flex-wrap card-view pb-4">
+          <div className="col-12 d-flex flex-row-reverse">
             <i
               className="bi bi-x"
-              style={{ fontSize: "30px", marginRight: "10px" }}
-              onClick={() => handleCloseEvent(weatherData.id)}
+              style={{ fontSize: "25px", marginRight: "10px" }}
+              onClick={(event) => handleCloseEvent(event, weatherData.id)}
             ></i>
           </div>
           <div
-            className="col-7 mt-0 text-center"
+            className="col-6 text-center"
             // onClick={() => handleClickEvent(weatherData)}
           >
             <div className="col-12">
               <h5>{`${weatherData.name}, ${weatherData.country}`}</h5>
-              <small>{new Date().toLocaleTimeString()}</small>
+              <small>{weatherData.dt}</small>
             </div>
-            <div className="col-12 mt-3">{weatherData.description}</div>
+            <div className="col-12 mt-3">
+              <img
+                src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
+                alt="icon"
+                style={{ width: "50px", height: "auto" }}
+              />
+              <strong>{weatherData.description}</strong>
+            </div>
           </div>
           <div
-            className="col-5 text-center"
+            className="col-6 text-center"
             // onClick={() => handleClickEvent(weatherData)}
           >
             <div>
-              <h1>{weatherData.temp}&#8451;</h1>
+              <h1>{weatherData.temp}°c</h1>
             </div>
             <div>
-              <small>Temp min: {weatherData.temp_min}</small>
+              <small>Temp min: {weatherData.temp_min}°c</small>
               <br />
-              <small>Temp max: {weatherData.temp_max}</small>
+              <small>Temp max: {weatherData.temp_max}°c</small>
             </div>
           </div>
         </div>
         <div
           className="dark d-flex py-4"
-          //   onClick={() => handleClickEvent(weatherData)}
+          // onClick={() => handleClickEvent(weatherData)}
         >
-          <div className="col-4 text-center">
-            <small>Pressure: {weatherData.pressure}</small>
-            <br />
-            <small>Humidity: {weatherData.humidity}%</small>
-            <br />
-            <small>Visibility: {weatherData.visibility / 1000}km</small>
+          <div className="col-4 d-flex justify-content-center">
+            <div className="text-start">
+              <small>
+                <strong>Pressure: </strong>
+                {weatherData.pressure}hPa
+              </small>
+              <br />
+              <small>
+                <strong>Humidity: </strong>
+                {weatherData.humidity}%
+              </small>
+              <br />
+              <small>
+                <strong>Visibility: </strong>
+                {(weatherData.visibility / 1000).toFixed(1)}km
+              </small>
+            </div>
           </div>
-          <div className="col-4 text-center custom-border">
-            <i className="bi bi-cursor-fill" style={{ fontSize: "25px" }}></i>
-            <br />
-            <small>4.0m/s 120 Degree</small>
+          <div className="col-4 d-flex justify-content-center align-items-center text-center custom-border">
+            <div>
+              <div className="mb-2">
+                <img
+                  src={direction_logo}
+                  style={{ width: "20px", height: "auto" }}
+                  alt="asdf"
+                />
+              </div>
+              <small>
+                {weatherData.speed}m/s {weatherData.deg} Degree
+              </small>
+            </div>
           </div>
-          <div className="col-4 text-center">
-            <small>
-              Sunrise:{" "}
-              {new Date(weatherData.sunrise * 1000).toLocaleTimeString()}
-            </small>
-            <br />
-            <small>
-              Sunset: {new Date(weatherData.sunset * 1000).toLocaleTimeString()}
-            </small>
+          <div className="col-4 d-flex justify-content-center align-items-center">
+            <div className="text-end">
+              <small>
+                <strong>Sunrise: </strong>
+                {weatherData.sunrise}
+              </small>
+              <br />
+              <small>
+                <strong>Sunset: </strong>
+                {weatherData.sunset}
+              </small>
+            </div>
           </div>
         </div>
       </div>

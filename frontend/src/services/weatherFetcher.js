@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import { weatherURLConstructor } from "../utils/weatherUtils";
 
 const fetchWeatherData = async (cityCode, errorHandler) => {

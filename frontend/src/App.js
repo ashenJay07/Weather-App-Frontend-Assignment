@@ -22,7 +22,7 @@ function App() {
           <Routes>
             <Route path="/" Component={Dashboard} />
             <Route path="/dashboard" Component={Dashboard} />
-            <Route path="/weather-forecast" Component={WeatherForeCast} />
+            <Route path="/weather-forecast/:id" Component={WeatherForeCast} />
           </Routes>
 
           <Footer />
