@@ -8,4 +8,13 @@ const weatherURLConstructor = (cityCode) => {
   return `https://api.openweathermap.org/data/2.5/group?id=${cityCode}&units=metric&appid=${WEATHER_API_KEY}`;
 };
 
-export { weatherURLConstructor };
+const expireTimeGenerator = (expTimeInMinutes) => {
+  return new Date().getTime() + parseInt(expTimeInMinutes) * 60 * 1000;
+};
+
+export {
+  cityCodes,
+  cityCodesString,
+  weatherURLConstructor,
+  expireTimeGenerator,
+};

@@ -1,7 +1,4 @@
 import React, { createContext, useReducer, useState } from "react";
-import AppReducer from "./appReducer";
-
-// Initial State
 
 // Create Context
 export const GlobalContext = createContext();

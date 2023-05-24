@@ -55,6 +55,55 @@ body {
 
 /* ----------------------------------------- */
 
+.weather-card .dark .custom-border,
+.weather-cardview .dark .custom-border {
+  border-color: white;
+  border: 1px solid;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.viewcard {
+  border-color: white;
+  border: 1px solid;
+  border-top: 0;
+  border-bottom: 0;
+  border-right: 0;
+}
+
+.weather-card .card-view {
+  background-image: url("../src/assets/images/card-background.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.weather-card .dark {
+  background-color: #383b47;
+}
+
+.weather-cardview .card-view {
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.weather-cardview .dark {
+  background-color: #383b47;
+}
+
+.weather-card .hover-card:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media (min-width: 992px) {
+  .render-card {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+/* ----------------------------------------- */
+
 .red {
   background-color: red;
 }
