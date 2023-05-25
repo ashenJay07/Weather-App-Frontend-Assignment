@@ -1,14 +1,15 @@
-import { DEFAULT_EXPIRE_TIME } from "../constants/constants";
 import cityData from "../data/cities.json";
+import { DEFAULT_EXPIRE_TIME } from "../constants/constants";
 import {
   cityCodes,
   dateFormatter,
   expireTimeGenerator,
   timeFormatter,
 } from "../utils/weatherUtils";
+
 import _ from "lodash";
 
-const cacheCityObjects = async (weatherDataList) => {
+const cacheCityObjects = (weatherDataList) => {
   for (const dataSet of weatherDataList) {
     const { id, dt, name, visibility } = dataSet;
     const { country, sunrise, sunset } = dataSet.sys;
@@ -66,6 +67,27 @@ const getAllCachedData = () => {
   return weatherData;
 };
 
+const expiredCachedData = () => {
+  const expiredWeatherData = [];
+  const currentTime = new Date().getTime();
+
+  cityCodes.forEach((cityCode) => {
+    const cityData = getCachedData(cityCode);
+
+    if (cityData) {
+      const { expiresAt } = cityData;
+
+      if (currentTime > expiresAt) {
+        expiredWeatherData.push(cityCode);
+      }
+    }
+  });
+
+  const expiredWeatherDataString = expiredWeatherData.join(",");
+
+  return expiredWeatherDataString;
+};
+
 const deleteCachedData = (key) => {
   localStorage.removeItem(key);
 };
@@ -78,11 +100,17 @@ const getBackgroundColor = (key) => {
   return localStorage.getItem(key);
 };
 
+const deleteBackgroundColor = (key) => {
+  localStorage.removeItem(key);
+};
+
 export {
   cacheCityObjects,
   getCachedData,
   getAllCachedData,
+  expiredCachedData,
   deleteCachedData,
   cacheBackgroundColor,
   getBackgroundColor,
+  deleteBackgroundColor,
 };

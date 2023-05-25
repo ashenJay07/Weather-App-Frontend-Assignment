@@ -100,11 +100,27 @@ body {
 
 .weather-card .hover-card:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .weather-cardview h1 {
   font-size: 65px;
+}
+
+.dashboard .spinner {
+  width: 80px;
+  height: 80px;
+  margin: 100px 0 130px;
+}
+
+.error-handler {
+  padding: 150px 0;
+}
+
+.error-handler h1 {
+  color: red;
+  font-size: 60px;
+  font-weight: bolder;
 }
 
 @media (min-width: 992px) {
@@ -112,26 +128,4 @@ body {
     display: flex;
     flex-wrap: wrap;
   }
-}
-
-/* ----------------------------------------- */
-
-.red {
-  background-color: red;
-}
-
-.yellow {
-  background-color: yellow;
-}
-
-.green {
-  background-color: green;
-}
-
-.blue {
-  background-color: blue;
-}
-
-.pink {
-  background-color: pink;
 }

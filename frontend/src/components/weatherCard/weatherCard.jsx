@@ -26,20 +26,17 @@ const WeatherCard = ({ weatherData, closeEvent }) => {
         <div className="d-flex flex-wrap card-view pb-4">
           <div className="col-12 d-flex flex-row-reverse">
             <i
-              className="bi bi-x"
-              style={{ fontSize: "25px", marginRight: "10px" }}
+              className="bi bi-x my-0"
+              style={{ fontSize: "23px", marginRight: "10px" }}
               onClick={(event) => handleCloseEvent(event, weatherData.id)}
             ></i>
           </div>
-          <div
-            className="col-6 text-center"
-            // onClick={() => handleClickEvent(weatherData)}
-          >
-            <div className="col-12">
+          <div className="col-6 text-center">
+            <div className="col-12 pt-1">
               <h5>{`${weatherData.name}, ${weatherData.country}`}</h5>
               <small>{weatherData.dt}</small>
             </div>
-            <div className="col-12 mt-3">
+            <div className="col-12 mt-2">
               <img
                 src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
                 alt="icon"
@@ -48,10 +45,7 @@ const WeatherCard = ({ weatherData, closeEvent }) => {
               <strong>{weatherData.description}</strong>
             </div>
           </div>
-          <div
-            className="col-6 text-center"
-            // onClick={() => handleClickEvent(weatherData)}
-          >
+          <div className="col-6 text-center">
             <div>
               <h1>{weatherData.temp}°c</h1>
             </div>

@@ -9,6 +9,8 @@ import {
   cacheCityObjects,
   deleteCachedData,
   getAllCachedData,
+  expiredCachedData,
+  deleteBackgroundColor,
 } from "../services/cacheController";
 import { GlobalContext } from "../context/globalState";
 import { cityCodesString, colorProvider } from "../utils/weatherUtils";
@@ -18,9 +20,12 @@ const Dashboard = () => {
   const [weatherData, setWeatherData] = useState([]);
 
   useEffect(() => {
-    if (getAllCachedData().length === 0) {
+    const expCityCodes = expiredCachedData();
+    if (getAllCachedData().length === 0 || expCityCodes) {
+      const cityCodes = !expCityCodes ? cityCodesString : expCityCodes;
+
       // prettier-ignore
-      fetchWeatherData(cityCodesString, errorHandler)
+      fetchWeatherData(cityCodes, errorHandler)
         .then(weatherDataList => cacheCityObjects(weatherDataList))
         .catch(error => console.log(error))
     }
@@ -32,6 +37,7 @@ const Dashboard = () => {
     }
 
     colorProvider();
+    deleteBackgroundColor("bgColor");
   });
 
   const closeEvent = (key) => {
@@ -43,7 +49,7 @@ const Dashboard = () => {
     <>
       <SearchBar />
 
-      <div className="container mt-5">
+      <div className="container mt-5 dashboard">
         <div className="col-sm-9 " style={{ margin: "auto" }}>
           <div className="render-card">
             {weatherData.length !== 0 ? (
@@ -55,8 +61,12 @@ const Dashboard = () => {
                 />
               ))
             ) : (
-              <div className="my-5 d-flex justify-content-center">
-                <Spinner animation="border" variant="info" />
+              <div className="my-5 col-12 d-flex justify-content-center">
+                <Spinner
+                  className="spinner"
+                  animation="border"
+                  variant="info"
+                />
               </div>
             )}
           </div>

@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getBackgroundColor, getCachedData } from "../services/cacheController";
 import direction_logo from "../assets/images/direction_icon.png";
 
 const WeatherForecast = () => {
+  const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState({});
   const { id } = useParams();
 
   useEffect(() => {
+    if (!getBackgroundColor("bgColor")) navigate("/");
+
     const divElement = document.getElementsByClassName("card-color");
-    console.log(getBackgroundColor("bgColor"));
     divElement[0].style.backgroundColor = getBackgroundColor("bgColor");
 
     const data = getCachedData(id);

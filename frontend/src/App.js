@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import "./App.css";
 import Header from "./components/common/header";
 import Footer from "./components/common/footer";
 import Dashboard from "./pages/dashboard";
 import WeatherForeCast from "./pages/weatherForecast";
-
-import { GlobalContext } from "./context/globalState.js";
 import ErrorHandler from "./middlewares/errorHandler";
+import { GlobalContext } from "./context/globalState.js";
+
+import "./App.css";
 
 function App() {
   const { error } = useContext(GlobalContext);

@@ -1,6 +1,6 @@
 import cityData from "../data/cities.json";
 import colorCodes from "../data/colorPalette.json";
-import { WEATHER_API_KEY } from "../constants/constants";
+import { MILLISECONDS, SECONDS, WEATHER_API_KEY } from "../constants/constants";
 
 const cityCodes = cityData.List.map((city) => city.CityCode);
 const cityCodesString = cityCodes.join(",");
@@ -10,7 +10,9 @@ const weatherURLConstructor = (cityCode) => {
 };
 
 const expireTimeGenerator = (expTimeInMinutes) => {
-  return new Date().getTime() + parseInt(expTimeInMinutes) * 60 * 1000;
+  return (
+    new Date().getTime() + parseInt(expTimeInMinutes) * SECONDS * MILLISECONDS
+  );
 };
 
 const colorProvider = () => {
@@ -36,7 +38,7 @@ const timeFormatter = (unixTimestamp) => {
 };
 
 const dateFormatter = (unixTimestamp) => {
-  const date = new Date(unixTimestamp * 1000);
+  const date = new Date(unixTimestamp * MILLISECONDS);
   // prettier-ignore
   const formattedDate = `${date.toLocaleString('en-us', { month: 'short' })} ${date.getDate()}`;
 
