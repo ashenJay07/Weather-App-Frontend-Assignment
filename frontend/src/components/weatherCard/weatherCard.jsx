@@ -27,7 +27,6 @@ const WeatherCard = ({ weatherData, closeEvent }) => {
           <div className="col-12 d-flex flex-row-reverse">
             <i
               className="bi bi-x my-0"
-              style={{ fontSize: "23px", marginRight: "10px" }}
               onClick={(event) => handleCloseEvent(event, weatherData.id)}
             ></i>
           </div>
@@ -40,7 +39,6 @@ const WeatherCard = ({ weatherData, closeEvent }) => {
               <img
                 src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
                 alt="icon"
-                style={{ width: "50px", height: "auto" }}
               />
               <strong>{weatherData.description}</strong>
             </div>
@@ -81,11 +79,7 @@ const WeatherCard = ({ weatherData, closeEvent }) => {
           <div className="col-4 d-flex justify-content-center align-items-center text-center custom-border">
             <div>
               <div className="mb-2">
-                <img
-                  src={direction_logo}
-                  style={{ width: "20px", height: "auto" }}
-                  alt="asdf"
-                />
+                <img src={direction_logo} alt="wind" />
               </div>
               <small>
                 {weatherData.speed}m/s {weatherData.deg} Degree

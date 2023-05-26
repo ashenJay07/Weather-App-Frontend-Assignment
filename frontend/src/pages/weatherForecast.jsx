@@ -51,7 +51,6 @@ const WeatherForecast = () => {
                         <img
                           src={`https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`}
                           alt="icon"
-                          style={{ width: "100px", height: "auto" }}
                         />
                       </div>
                       {weatherData.description}
@@ -91,11 +90,7 @@ const WeatherForecast = () => {
                 <div className="col-4 d-flex justify-content-center align-items-center text-center custom-border">
                   <div>
                     <div className="mb-2">
-                      <img
-                        src={direction_logo}
-                        style={{ width: "25px", height: "auto" }}
-                        alt="asdf"
-                      />
+                      <img src={direction_logo} alt="wind" />
                     </div>
                     <small>
                       <strong>

@@ -55,6 +55,10 @@ body {
 
 /* ----------------------------------------- */
 
+.dashboard .dashboard-frame {
+  margin: auto;
+}
+
 .weather-card .dark .custom-border,
 .weather-cardview .dark .custom-border {
   border-color: #515566 !important;
@@ -91,6 +95,31 @@ body {
   background-repeat: no-repeat;
   background-size: 100% auto;
   font-weight: 500;
+}
+
+.weather-card .card-view i {
+  font-size: 23px;
+  padding-right: 10px;
+}
+
+.weather-card .card-view img {
+  width: 50px;
+  height: auto;
+}
+
+.weather-cardview .card-view img {
+  width: 100px;
+  height: auto;
+}
+
+.weather-card .dark img {
+  width: 20px;
+  height: auto;
+}
+
+.weather-cardview .dark img {
+  width: 25px;
+  height: auto;
 }
 
 .weather-cardview .card-view i {

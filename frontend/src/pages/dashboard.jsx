@@ -50,7 +50,7 @@ const Dashboard = () => {
       <SearchBar />
 
       <div className="container mt-5 dashboard">
-        <div className="col-sm-9 " style={{ margin: "auto" }}>
+        <div className="col-sm-9 dashboard-frame">
           <div className="render-card">
             {weatherData.length !== 0 ? (
               weatherData.map((cityData) => (
